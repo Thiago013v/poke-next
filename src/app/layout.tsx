@@ -41,7 +41,7 @@ export default function RootLayout({
 
           {children}
 
-          <footer className="row-start-3 row-end-4 col-start-1 col-end-2 bg-zinc-800"></footer>
+          <footer className="row-start-3 row-end-4 col-start-1 col-end-2 bg-zinc-800 mt-4"></footer>
         </div>
       </body>
     </html>
