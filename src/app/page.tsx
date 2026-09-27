@@ -1,8 +1,8 @@
 import axios from "axios";
 import type { ListPokemonsType, PokemonsType } from "./_types/types";
-import CardPokemon from "./_components/CardPokemon";
 import Image from "next/image";
 import pokebola from "../../public/pokebola.png";
+import ListPokemons from "./_components/ListPokemons";
 
 export default async function Home() {
   const listPokemons = await axios.get(
@@ -12,6 +12,7 @@ export default async function Home() {
   const data: ListPokemonsType = listPokemons.data;
 
   const arrayPokemons: PokemonsType[] = [];
+
   for (let i = 0; i < data.results.length; i++) {
     const url = data.results[i].url;
 
@@ -55,19 +56,7 @@ export default async function Home() {
         ></Image>{" "}
       </div>
 
-      <div>
-        <ul className="flex flex-row justify-center items-center flex-wrap gap-4">
-          {arrayPokemons.map((currentPokemon: PokemonsType) => (
-            <li key={currentPokemon.id}>
-              <CardPokemon
-                id={currentPokemon.id}
-                img={currentPokemon.imgPokemon}
-                name={currentPokemon.name}
-              ></CardPokemon>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ListPokemons pokemonsList={arrayPokemons}></ListPokemons>
     </main>
   );
 }
