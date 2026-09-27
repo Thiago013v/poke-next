@@ -6,7 +6,7 @@ import pokebola from "../../public/pokebola.png";
 
 export default async function Home() {
   const listPokemons = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0",
+    "https://pokeapi.co/api/v2/pokemon/?limit=12&offset=0",
   );
 
   const data: ListPokemonsType = listPokemons.data;
