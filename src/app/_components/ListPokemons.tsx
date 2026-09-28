@@ -14,7 +14,7 @@ export default function ListPokemons({
 
   useEffect(() => {
     handlePokemonList(pokemonsList);
-  }, []);
+  }, [pokemonsList, handlePokemonList]);
 
   return (
     <div>
