@@ -33,7 +33,7 @@ export default function RootLayout({
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="text-white text-2xl">
+                    <Link href="/about" className="text-white text-2xl">
                       Sobre
                     </Link>
                   </li>
