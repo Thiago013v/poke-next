@@ -6,7 +6,7 @@ import ListPokemons from "./_components/ListPokemons";
 
 export default async function Home() {
   const listPokemons = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon/?limit=12&offset=0",
+    "https://pokeapi.co/api/v2/pokemon/?limit=12&offset=0"
   );
 
   const data: ListPokemonsType = listPokemons.data;
@@ -16,12 +16,12 @@ export default async function Home() {
   for (let i = 0; i < data.results.length; i++) {
     const url = data.results[i].url;
 
-    async function teste() {
+    async function getPokemon() {
       const pokemon = await axios.get(url);
       return pokemon;
     }
 
-    const pokemon = await teste();
+    const pokemon = await getPokemon();
 
     const name = pokemon.data.name;
     const weight = pokemon.data.weight;
@@ -48,12 +48,7 @@ export default async function Home() {
         <h1 className="text-5xl text-black font-bold mt-10 mb-10">
           <span className="text-red-500">Poke</span>Next
         </h1>
-        <Image
-          src={pokebola}
-          alt="Pokebola"
-          width={60}
-          height={50}
-        ></Image>{" "}
+        <Image src={pokebola} alt="Pokebola" width={60} height={50}></Image>{" "}
       </div>
 
       <ListPokemons pokemonsList={arrayPokemons}></ListPokemons>

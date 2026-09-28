@@ -1,8 +1,8 @@
 "use client";
 
-import usePokemonContext from "../_hooks/usePokemonContext";
 import CardPokemon from "./CardPokemon";
 import type { PokemonsType } from "../_types/types";
+import usePokemonContext from "../_hooks/usePokemonContext";
 import { useEffect } from "react";
 
 export default function ListPokemons({
@@ -14,7 +14,7 @@ export default function ListPokemons({
 
   useEffect(() => {
     handlePokemonList(pokemonsList);
-  });
+  }, []);
 
   return (
     <div>
