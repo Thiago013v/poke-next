@@ -8,8 +8,18 @@ export default function PokemonInfo({ id }: { id: string }) {
   const { pokemonList } = usePokemonContext();
 
   const pokemon = pokemonList.find(
-    (currentPokemon: PokemonsType) => currentPokemon.id === Number(id),
+    (currentPokemon: PokemonsType) => currentPokemon.id === Number(id)
   );
+
+  if (!pokemon) {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-5xl text-black font-bold">
+          Pokémon não encontrado
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-3">
