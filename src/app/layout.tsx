@@ -10,8 +10,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang="pt-br">
+      <body>
         <PokemonContextProvider>
           <div className="min-h-svh grid grid-rows-[100px_1fr_70px] grid-cols-[1fr]">
             <header className="flex flex-row justify-between items-center row-start-1 row-end-2 col-start-1 col-end-2 bg-zinc-800 p-8">
