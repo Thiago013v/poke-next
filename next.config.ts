@@ -7,11 +7,9 @@ const nextConfig: NextConfig = {
 
 module.exports = {
   images: {
-    remotePatterns: [
-      new URL(
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
-      ),
-    ],
+    domains: ["raw.githubusercontent.com"],
+
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png
   },
 };
 
