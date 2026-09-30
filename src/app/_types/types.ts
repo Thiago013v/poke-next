@@ -1,4 +1,4 @@
-interface resultsType {
+export interface resultsType {
   name: string;
   url: string;
 }
