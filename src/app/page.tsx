@@ -21,7 +21,8 @@ export default function Home() {
           alt="Pokebola"
           width={60}
           height={50}
-        ></Image>{" "}
+          className="w-auto h-auto"
+        ></Image>
       </div>
 
       <Suspense

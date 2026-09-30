@@ -14,6 +14,7 @@ export default function About() {
         alt="Imagem do Charizard"
         width={400}
         height={0}
+        className="w-auto h-auto"
       ></Image>
     </main>
   );
