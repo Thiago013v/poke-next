@@ -3,6 +3,10 @@ import pokebola from "../../public/pokebola.png";
 import Image from "next/image";
 import Link from "next/link";
 import PokemonContextProvider from "./PokemonContextProvider";
+import { Geist } from "next/font/google";
+import { cn } from "@/src/lib/utils";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function RootLayout({
   children,
@@ -10,7 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
+    <html
+      lang="pt-br"
+      suppressHydrationWarning
+      className={cn("font-sans", geist.variable)}
+    >
       <body suppressHydrationWarning>
         <PokemonContextProvider>
           <div className="min-h-svh grid grid-rows-[100px_1fr_70px] grid-cols-[1fr]">
