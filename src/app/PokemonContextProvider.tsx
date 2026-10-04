@@ -19,7 +19,9 @@ export default function PokemonContextProvider({
   const [pokemonList, setPokemonList] = useState<PokemonsType[]>([]);
 
   const handlePokemonList = (pokemonsList: PokemonsType[]) => {
-    setPokemonList(pokemonsList);
+    const newPokemonsList = pokemonList.concat(pokemonsList);
+
+    setPokemonList(newPokemonsList);
   };
 
   return (

@@ -8,7 +8,7 @@ export default function PokemonInfo({ id }: { id: string }) {
   const { pokemonList } = usePokemonContext();
 
   const pokemon = pokemonList.find(
-    (currentPokemon: PokemonsType) => currentPokemon.id === Number(id)
+    (currentPokemon: PokemonsType) => currentPokemon.id === Number(id),
   );
 
   if (!pokemon) {
@@ -36,6 +36,7 @@ export default function PokemonInfo({ id }: { id: string }) {
         alt="ivysaur"
         width={200}
         height={0}
+        className="h-auto w-auto"
       ></Image>
 
       <div className="flex flex-col justify-center items-center">

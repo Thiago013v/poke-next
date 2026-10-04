@@ -1,58 +1,34 @@
 "use client";
 
 import CardPokemon from "./CardPokemon";
-import type { PokemonsType, resultsType } from "../_types/types";
-import { useEffect } from "react";
+import type { PokemonsType } from "../_types/types";
+import { useEffect, useState } from "react";
 import usePokemonContext from "../_hooks/usePokemonContext";
-import axios from "axios";
-import { use } from "react";
 
 export default function ListPokemons({
-  pokemonAPI,
+  getPokemon,
 }: {
-  pokemonAPI: Promise<{ results: resultsType[] }>;
+  getPokemon: (offset: number) => Promise<PokemonsType[]>;
 }) {
-  const pokemonsList = use(pokemonAPI);
   const { handlePokemonList, pokemonList } = usePokemonContext();
+  const [offset, setOffset] = useState<number>(12);
 
   useEffect(() => {
-    const arrayPokemons: PokemonsType[] = [];
-
-    async function getDataPokemonList() {
-      for (let i = 0; i < pokemonsList.results.length; i++) {
-        const url = pokemonsList.results[i].url;
-
-        const pokemonAPI = await axios.get(url);
-
-        const pokemon = pokemonAPI;
-
-        const name = pokemon.data.name;
-        const weight = pokemon.data.weight;
-        const height = pokemon.data.height;
-        const id = pokemon.data.id;
-        const type = pokemon.data.types[0].type.name;
-        const imgPokemon = pokemon.data.sprites.other.home.front_default;
-
-        const pokemonObject: PokemonsType = {
-          name: name,
-          height: height,
-          id: id,
-          imgPokemon: imgPokemon,
-          type: type,
-          weight: weight,
-        };
-
-        arrayPokemons.push(pokemonObject);
-      }
-
-      handlePokemonList(arrayPokemons);
+    if (pokemonList.length > 0) {
+      return;
     }
 
-    getDataPokemonList();
-  }, [pokemonsList, handlePokemonList]);
+    async function pokemons() {
+      const pokemonsList = await getPokemon(0);
+
+      handlePokemonList(pokemonsList);
+    }
+
+    pokemons();
+  }, [getPokemon, handlePokemonList, pokemonList]);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center gap-4">
       <ul className="flex flex-row justify-center items-center flex-wrap gap-4">
         {pokemonList.map((currentPokemon: PokemonsType) => (
           <li key={currentPokemon.id}>
@@ -64,6 +40,23 @@ export default function ListPokemons({
           </li>
         ))}
       </ul>
+
+      <button
+        className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
+        onClick={() => {
+          setOffset((prev) => (prev += 12));
+
+          async function pokemons() {
+            const pokemonsList: PokemonsType[] = await getPokemon(offset);
+
+            handlePokemonList(pokemonsList);
+          }
+
+          pokemons();
+        }}
+      >
+        Carregar Mais
+      </button>
     </div>
   );
 }
