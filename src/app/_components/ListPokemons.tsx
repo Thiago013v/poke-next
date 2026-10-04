@@ -2,7 +2,7 @@
 
 import CardPokemon from "./CardPokemon";
 import type { PokemonsType } from "../_types/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import usePokemonContext from "../_hooks/usePokemonContext";
 
 export default function ListPokemons({
@@ -11,7 +11,6 @@ export default function ListPokemons({
   getPokemon: (offset: number) => Promise<PokemonsType[]>;
 }) {
   const { handlePokemonList, pokemonList } = usePokemonContext();
-  const [offset, setOffset] = useState<number>(12);
 
   useEffect(() => {
     if (pokemonList.length > 0) {
@@ -44,10 +43,10 @@ export default function ListPokemons({
       <button
         className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
         onClick={() => {
-          setOffset((prev) => (prev += 12));
-
           async function pokemons() {
-            const pokemonsList: PokemonsType[] = await getPokemon(offset);
+            const pokemonsList: PokemonsType[] = await getPokemon(
+              pokemonList.length,
+            );
 
             handlePokemonList(pokemonsList);
           }
