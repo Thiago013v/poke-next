@@ -2,7 +2,7 @@
 
 import CardPokemon from "./CardPokemon";
 import type { PokemonsType } from "../_types/types";
-import { useEffect, useState } from "react";
+import { useEffect, useTransition } from "react";
 import { QuarterRing } from "@/src/components/quarter-ring";
 import usePokemonContext from "../_hooks/usePokemonContext";
 
@@ -12,20 +12,18 @@ export default function ListPokemons({
   getPokemon: (offset: number) => Promise<PokemonsType[]>;
 }) {
   const { handlePokemonList, pokemonList } = usePokemonContext();
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     if (pokemonList.length > 0) {
       return;
     }
 
-    async function pokemons() {
+    startTransition(async () => {
       const pokemonsList = await getPokemon(0);
 
       handlePokemonList(pokemonsList);
-    }
-
-    pokemons();
+    });
   }, [getPokemon, handlePokemonList, pokemonList]);
 
   return (
@@ -47,19 +45,15 @@ export default function ListPokemons({
       ) : (
         <button
           className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
-          onClick={() => {
-            async function pokemons() {
-              setIsPending(true);
+          onClick={() =>
+            startTransition(async () => {
               const pokemonsList: PokemonsType[] = await getPokemon(
                 pokemonList.length,
               );
 
               handlePokemonList(pokemonsList);
-              setIsPending(false);
-            }
-
-            pokemons();
-          }}
+            })
+          }
         >
           Carregar Mais
         </button>
