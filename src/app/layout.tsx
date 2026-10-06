@@ -22,7 +22,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <PokemonContextProvider>
           <div className="min-h-svh grid grid-rows-[100px_1fr_70px] grid-cols-[1fr]">
-            <header className="flex flex-row justify-between items-center row-start-1 row-end-2 col-start-1 col-end-2 bg-zinc-800 p-8">
+            <header className="flex flex-row max-md:flex-col max-md:p-2 justify-between items-center row-start-1 row-end-2 col-start-1 col-end-2 bg-zinc-800 p-8">
               <div className="flex flex-row justify-center items-center gap-2">
                 <Image
                   src={pokebola}

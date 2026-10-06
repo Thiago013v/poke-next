@@ -12,7 +12,7 @@ export default function About() {
       <Image
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/6.png"
         alt="Imagem do Charizard"
-        width={400}
+        width={350}
         height={0}
         className="w-auto h-auto"
       ></Image>
