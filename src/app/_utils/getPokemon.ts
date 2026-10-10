@@ -1,3 +1,5 @@
+"use cache";
+
 import axios from "axios";
 import type { PokemonsType } from "../_types/types";
 

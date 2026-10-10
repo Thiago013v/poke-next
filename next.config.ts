@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
-};
 
-module.exports = {
   images: {
     domains: ["raw.githubusercontent.com"],
   },

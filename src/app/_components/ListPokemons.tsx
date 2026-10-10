@@ -7,7 +7,11 @@ import { QuarterRing } from "@/src/components/quarter-ring";
 import usePokemonContext from "../_hooks/usePokemonContext";
 import getListPokemons from "../_utils/getPokemon";
 
-export default function ListPokemons() {
+export default function ListPokemons({
+  listPokemons,
+}: {
+  listPokemons: PokemonsType[];
+}) {
   const { handlePokemonList, pokemonList } = usePokemonContext();
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -16,14 +20,8 @@ export default function ListPokemons() {
       return;
     }
 
-    async function pokemons() {
-      const pokemonsList = await getListPokemons(0);
-
-      handlePokemonList(pokemonsList);
-    }
-
-    pokemons();
-  }, [handlePokemonList, pokemonList]);
+    handlePokemonList(listPokemons);
+  }, [handlePokemonList, listPokemons, pokemonList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
