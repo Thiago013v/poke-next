@@ -2,29 +2,28 @@
 
 import CardPokemon from "./CardPokemon";
 import type { PokemonsType } from "../_types/types";
-import { useEffect, useTransition } from "react";
+import { useEffect, useState } from "react";
 import { QuarterRing } from "@/src/components/quarter-ring";
 import usePokemonContext from "../_hooks/usePokemonContext";
+import getListPokemons from "../_utils/getPokemon";
 
-export default function ListPokemons({
-  getPokemon,
-}: {
-  getPokemon: (offset: number) => Promise<PokemonsType[]>;
-}) {
+export default function ListPokemons() {
   const { handlePokemonList, pokemonList } = usePokemonContext();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   useEffect(() => {
     if (pokemonList.length > 0) {
       return;
     }
 
-    startTransition(async () => {
-      const pokemonsList = await getPokemon(0);
+    async function pokemons() {
+      const pokemonsList = await getListPokemons(0);
 
       handlePokemonList(pokemonsList);
-    });
-  }, [getPokemon, handlePokemonList, pokemonList]);
+    }
+
+    pokemons();
+  }, [handlePokemonList, pokemonList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -45,15 +44,13 @@ export default function ListPokemons({
       ) : (
         <button
           className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
-          onClick={() =>
-            startTransition(async () => {
-              const pokemonsList: PokemonsType[] = await getPokemon(
-                pokemonList.length,
-              );
+          onClick={async () => {
+            setIsPending(true);
+            const pokemonsList = await getListPokemons(pokemonList.length);
 
-              handlePokemonList(pokemonsList);
-            })
-          }
+            setIsPending(false);
+            handlePokemonList(pokemonsList);
+          }}
         >
           Carregar Mais
         </button>
