@@ -2,7 +2,7 @@
 
 import CardPokemon from "./CardPokemon";
 import type { PokemonsType } from "../_types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { QuarterRing } from "@/src/components/quarter-ring";
 import usePokemonContext from "../_hooks/usePokemonContext";
 import getListPokemons from "../_utils/getPokemon";
@@ -12,16 +12,8 @@ export default function ListPokemons({
 }: {
   listPokemons: PokemonsType[];
 }) {
-  const { handlePokemonList, pokemonList } = usePokemonContext();
+  const { handlePokemonList, pokemonList } = usePokemonContext(listPokemons);
   const [isPending, setIsPending] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (pokemonList.length > 0) {
-      return;
-    }
-
-    handlePokemonList(listPokemons);
-  }, [handlePokemonList, listPokemons, pokemonList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
