@@ -23,7 +23,10 @@ export default function CardPokemon({ img, id, name }: CardPokemonType) {
         #{id}
       </p>
 
-      <h3 className="text-2xl text-white font-bold">{name}</h3>
+      <h3 className="text-2xl text-white font-bold">
+        {name.charAt(0).toUpperCase()}
+        {name.slice(1, name.length)}
+      </h3>
 
       <Link
         href={`/${id}`}

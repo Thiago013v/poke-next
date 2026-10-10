@@ -24,7 +24,10 @@ export default function PokemonInfo({ id }: { id: string }) {
   return (
     <div className="flex flex-col justify-center items-center gap-3">
       <div className="bg-black p-4 flex flex-row justify-center items-center w-80 rounded-lg">
-        <h1 className="text-white font-bold text-5xl t">{pokemon?.name}</h1>
+        <h1 className="text-white font-bold text-5xl t">
+          {pokemon?.name.charAt(0).toUpperCase()}
+          {pokemon?.name.slice(1, pokemon?.name.length)}
+        </h1>
       </div>
 
       <Image
