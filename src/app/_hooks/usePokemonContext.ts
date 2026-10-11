@@ -15,7 +15,7 @@ export default function usePokemonContext(listPokemons: PokemonsType[]) {
   const { handlePokemonList, pokemonList } = response;
 
   useEffect(() => {
-    if (pokemonList.length > 0) {
+    if (pokemonList.length > 0 || listPokemons.length === 0) {
       return;
     }
 
