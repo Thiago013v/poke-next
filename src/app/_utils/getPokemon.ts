@@ -6,25 +6,30 @@ import type { PokemonsType } from "../_types/types";
 export default async function getListPokemons(
   offset: number,
 ): Promise<PokemonsType[]> {
-  const pokemonsList = await axios.get(
-    `https://pokeapi.co/api/v2/pokemon/?limit=12&offset=${String(offset)}`,
-  );
+  const pokemonsList = await Promise.all([
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 1}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 2}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 3}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 4}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 5}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 6}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 7}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 8}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 9}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 10}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 11}/`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 12}/`),
+  ]);
 
   const arrayPokemons: PokemonsType[] = [];
 
-  for (let i = 0; i < pokemonsList.data.results.length; i++) {
-    const url = pokemonsList.data.results[i].url;
-
-    const pokemonAPI = await axios.get(url);
-
-    const pokemon = pokemonAPI;
-
-    const name = pokemon.data.name;
-    const weight = pokemon.data.weight;
-    const height = pokemon.data.height;
-    const id = pokemon.data.id;
-    const type = pokemon.data.types[0].type.name;
-    const imgPokemon = pokemon.data.sprites.other.home.front_default;
+  for (let i = 0; i < pokemonsList.length; i++) {
+    const name = pokemonsList[i].data.name;
+    const weight = pokemonsList[i].data.weight;
+    const height = pokemonsList[i].data.height;
+    const id = pokemonsList[i].data.id;
+    const type = pokemonsList[i].data.types[0].type.name;
+    const imgPokemon = pokemonsList[i].data.sprites.other.home.front_default;
 
     const pokemonObject: PokemonsType = {
       name: name,
