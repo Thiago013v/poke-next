@@ -1,4 +1,5 @@
 import Link from "next/link";
+import imgPokemonNotFound from "../../../public/Imagem Pokémon não disponível.png";
 import Image from "next/image";
 
 interface CardPokemonType {
@@ -11,8 +12,8 @@ export default function CardPokemon({ img, id, name }: CardPokemonType) {
   return (
     <div className="flex flex-col items-center border-3 border-red-500 bg-zinc-800 rounded-2xl h-105 w-75 gap-2">
       <Image
-        src={img}
-        alt={name}
+        src={img ? img : imgPokemonNotFound}
+        alt={`Imagem do ${name}`}
         width={130}
         height={0}
         className="w-auto"

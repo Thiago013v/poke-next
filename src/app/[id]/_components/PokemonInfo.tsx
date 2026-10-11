@@ -1,4 +1,5 @@
 import axios from "axios";
+import imgPokemonNotFound from "../../../../public/Imagem Pokémon não disponível.png";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -21,8 +22,12 @@ export default async function PokemonInfo({ id }: { id: string }) {
       </div>
 
       <Image
-        src={pokemon?.data.sprites.other.home.front_default}
-        alt="ivysaur"
+        src={
+          pokemon?.data.sprites.other.home.front_default
+            ? pokemon?.data.sprites.other.home.front_default
+            : imgPokemonNotFound
+        }
+        alt={`Imagem do ${pokemon?.data.name}`}
         width={200}
         height={0}
         className="h-auto w-auto"
