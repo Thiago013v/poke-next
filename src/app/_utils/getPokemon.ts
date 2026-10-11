@@ -5,20 +5,32 @@ import type { PokemonsType } from "../_types/types";
 
 export default async function getListPokemons(offset: number) {
   try {
-    const pokemonsList = await Promise.all([
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 1}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 2}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 3}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 4}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 5}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 6}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 7}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 8}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 9}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 10}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 11}/`),
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 12}/`),
-    ]);
+    let pokemonsList;
+
+    if (offset === 1020) {
+      pokemonsList = await Promise.all([
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 1}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 2}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 3}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 4}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 5}/`),
+      ]);
+    } else {
+      pokemonsList = await Promise.all([
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 1}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 2}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 3}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 4}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 5}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 6}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 7}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 8}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 9}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 10}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 11}/`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${offset + 12}/`),
+      ]);
+    }
 
     const arrayPokemons: PokemonsType[] = [];
 

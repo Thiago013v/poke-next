@@ -32,32 +32,38 @@ export default function ListPokemons({
         </ul>
       </div>
 
-      {isPending ? (
-        <QuarterRing className="w-10 h-10 text-red-500" />
-      ) : (
-        <button
-          className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
-          onClick={async () => {
-            setIsPending(true);
-            const pokemonsList = await getListPokemons(pokemonList.length);
-
-            if (pokemonsList.length === 0) {
-              setIsPending(false);
-              setIsError(true);
-              return;
-            }
-
-            setIsError(false);
-            setIsPending(false);
-            handlePokemonList(pokemonsList);
-          }}
-        >
-          Carregar Mais
-        </button>
-      )}
-
       {isError && (
         <p className="text text-red-500 font-bold">ERRO AO CARREGAR POKÉMONS</p>
+      )}
+
+      {pokemonList.length === 1025 ? (
+        <h3 className="text-2xl font-bold">Você chegou ao fim!</h3>
+      ) : (
+        <>
+          {isPending ? (
+            <QuarterRing className="w-10 h-10 text-red-500" />
+          ) : (
+            <button
+              className="flex flex-row justify-center items-center p-4 border-none bg-red-500 font-bold text-white text-[1.1rem] rounded-lg cursor-pointer hover:bg-red-700"
+              onClick={async () => {
+                setIsPending(true);
+                const pokemonsList = await getListPokemons(pokemonList.length);
+
+                if (pokemonsList.length === 0) {
+                  setIsPending(false);
+                  setIsError(true);
+                  return;
+                }
+
+                setIsError(false);
+                setIsPending(false);
+                handlePokemonList(pokemonsList);
+              }}
+            >
+              Carregar Mais
+            </button>
+          )}
+        </>
       )}
     </div>
   );
