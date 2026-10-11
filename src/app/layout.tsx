@@ -29,6 +29,7 @@ export default function RootLayout({
                   alt="Pokebola"
                   width={50}
                   height={50}
+                  loading="eager"
                 ></Image>{" "}
                 <h2 className="text-4xl text-white font-bold">PokeNext</h2>
               </div>
